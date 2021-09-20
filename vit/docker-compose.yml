@@ -1,0 +1,8 @@
+services:
+  vit:
+    build: .
+    container_name: "vit"
+    volumes:
+    - "./:/workspace"
+    working_dir: "/workspace"
+    tty: true

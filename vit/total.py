@@ -16,3 +16,4 @@ v = ViT(
 img = torch.randn(1, 3, 256, 256)
 
 preds = v(img)
+print(preds.shape)

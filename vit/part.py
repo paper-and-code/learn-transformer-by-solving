@@ -72,7 +72,25 @@ assert k.shape == (2, 16, 65, 64)
 assert v.shape == (2, 16, 65, 64)
 
 # scale = 1/sqrt(d)
+scale = 64 ** -0.5
 dots = torch.matmul(q, k.transpose(-1, -2)) * scale
+print(f' after q*kT => {dots.shape}')
+attn = nn.Softmax(dim=-1)(dots)
+# attn => b(2), h(16), n(65), n(65)
+print(f' A => {attn.shape} {torch.sum(attn[0][0][0])} {torch.sum(attn[-1][-1][-1])}')
+out= torch.matmul(attn, v)
+out = rearrange(out, 'b h n d -> b n (h d)')
+dropout=0.1
+output = nn.Sequential(
+            nn.Linear(inner_dim, dim),
+            nn.Dropout(dropout)
+        )(out)
+print(f'output => {output.shape}')
+ave = output.mean(dim=1)
+top = output[:, 0]
+print(f'ave : {ave.shape} top : {top.shape}')
+# heads != 1(multi head) or dim_head != dim
+# dots = A
 ## Q, K, V =
 # Q x K = Calculate Which patch is similar or not
 # Self Attention = softmax(q * k) * v

@@ -1,0 +1,12 @@
+services:
+  vit:
+    build: .
+    container_name: "vit"
+    volumes:
+    - "./:/workspace"
+    working_dir: "/workspace"
+    tty: true
+    runtime: nvidia
+    environment: 
+    - NVIDIA_VISIBLE_DEVICES=all
+    - NVIDIA_DRIVER_CAPABILITIES=all

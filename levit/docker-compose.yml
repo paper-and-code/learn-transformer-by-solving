@@ -1,12 +1,15 @@
+# @format
+
 services:
-  vit:
+  levit:
     build: .
-    container_name: "vit"
-    volumes:
-    - "./:/workspace"
+    container_name: "levit"
     working_dir: "/workspace"
     tty: true
     runtime: nvidia
-    environment: 
-    - NVIDIA_VISIBLE_DEVICES=all
-    - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      - "/mnt/SSDb/coco2017:/dataB/coco2017"
+      - "./:/workspace"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all

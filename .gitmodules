@@ -1,3 +1,6 @@
 [submodule "levit/Levit"]
 	path = levit/Levit
 	url = https://github.com/facebookresearch/LeViT.git
+[submodule "levit/LeViT"]
+	path = levit/LeViT
+	url = git@github.com:cin-chan/LeViT.git

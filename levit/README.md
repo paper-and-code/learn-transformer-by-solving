@@ -6,3 +6,6 @@
 
 - MixUp 
   - Understand the Area between Dog and Cat 
+
+- Why is splitted by square root of Dk ? 
+  - variance of q * transpose of k should be 1 

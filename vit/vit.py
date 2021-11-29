@@ -139,7 +139,14 @@ class ViT(nn.Module):
                                       nn.Linear(dim, num_classes))
 
     def forward(self, img):
+        print(f'input img of ViT : {img.shape}')
+        # Linear Projection of Flattened Patches
         x = self.to_patch_embedding(img)
+        # Input Image = (3, 256(H), 256(W))
+        # 256 / 32 = 8(Number of Patch in Height Direction)
+        # x => (1, 8x8, 1024) B, Patch Num, Feature Num in 1 Patch
+        print(f'Linear Project Mapping : ', x.shape)
+        # torch.Size([1, 64, 1024])
         b, n, _ = x.shape
 
         cls_tokens = repeat(self.cls_token, '() n d -> b n d', b=b)

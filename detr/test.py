@@ -1,4 +1,5 @@
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
+import os
 import argparse
 import random
 from pathlib import Path
@@ -9,6 +10,7 @@ sys.path.append("./DETR")
 import numpy as np
 import cv2
 import torch
+from torchvision import transforms
 from torch.utils.data import DataLoader, DistributedSampler
 
 import DETR.datasets
@@ -201,10 +203,21 @@ def main(args):
             lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
             args.start_epoch = checkpoint['epoch'] + 1
 
-    img_paths = glob.glob(args.coco_path, 'val2017', '000000229*jpg')
+    img_paths = glob.glob(
+        os.path.join(args.coco_path, 'val2017', '000000229*jpg'))
     for img_path in img_paths:
         img = cv2.imread(img_path)
-        print(f'img : {img.shape}')
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        # img = img.transpose(2, 0, 1)
+        # img = np.ascontiguousarray(img, dtype=np.float32)
+        # img /= 255.0
+        # img = img[np.newaxis, :, :, :]
+
+        img_th = transforms.ToTensor()(img)
+        img_th = img_th.unsqueeze(0)
+        print(f'img : {img_th.shape}')
+        outputs = model(utils.NestedTensor(tensors=img_th, mask=None))
+        print(type(outputs))
         # model_without_ddp
     print(model)
 

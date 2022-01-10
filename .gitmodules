@@ -4,3 +4,6 @@
 [submodule "levit/LeViT"]
 	path = levit/LeViT
 	url = git@github.com:cin-chan/LeViT.git
+[submodule "detr/DETR"]
+	path = detr/DETR
+	url = git@github.com:cin-chan/detr.git

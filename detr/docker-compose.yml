@@ -1,0 +1,16 @@
+# @format
+
+services:
+  detr:
+    build: .
+    container_name: "detr"
+    working_dir: "/workspace"
+    tty: true
+    runtime: nvidia
+    volumes:
+      - "/mnt/SSDb/coco2017:/data/coco2017"
+      - "/mnt/SSDb/coco_detr:/data/coco_detr"
+      - "./:/workspace"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all

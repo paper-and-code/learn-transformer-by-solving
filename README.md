@@ -1,4 +1,4 @@
-# ⚡️ Learn Transformer by Solving (Transformerを書く勉強)
+# ⚡️ Learn Transformer by Solving (Transformerを書く勉強会)
 - Online Lecture From 2021 Sep To 2022 February
 - Twitter Hash Tag #write-transformer
 
